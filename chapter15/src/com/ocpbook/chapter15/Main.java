@@ -2,13 +2,13 @@ package com.ocpbook.chapter15;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.function.BiConsumer;
-import java.util.function.Consumer;
-import java.util.function.Supplier;
+import java.util.function.*;
 import java.lang.*;
 
 public class Main {
     public static void main(String[] args) {
+
+        //supplier
         Supplier<LocalDate> s1 = LocalDate::now;
         Supplier<LocalDate> s2 = () -> LocalDate.now();
 
@@ -29,7 +29,7 @@ public class Main {
         ArrayList<String> a1 = s3.get();
         System.out.println(a1);
 
-
+//consumer
         Consumer<String> c1 = System.out::println;
         Consumer<String> c2 = x -> System.out.println(x);
 
@@ -54,5 +54,20 @@ public class Main {
         b22.accept("chick", "Tweep");
 
         System.out.println(map1);
+
+        //predicate
+        Predicate<String> p1 = String::isEmpty;
+        Predicate<String> p2 = x -> x.isEmpty();
+
+        System.out.println(p1.test("sdfsdfsd"));  // false
+        System.out.println(p2.test(""));  // true
+
+
+        BiPredicate<String, String> bp1 = String::startsWith;
+        BiPredicate<String, String> bp2 =
+                (string, prefix) -> string.startsWith(prefix);
+
+        System.out.println(bp1.test("chicken", "chick"));  // true
+        System.out.println(bp2.test("chicken", "chick"));  // true
     }
 }
